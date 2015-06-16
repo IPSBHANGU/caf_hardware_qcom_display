@@ -222,8 +222,8 @@ void MDPComp::timeout_handler(void *udata) {
 
     ctx->mDrawLock.lock();
 
-    if(!ctx->proc) {
-        ALOGE("%s: HWC proc not registered", __FUNCTION__);
+    if(!sHandleTimeout) {
+        ALOGD_IF(isDebug(), "%s:Do not handle this timeout", __FUNCTION__);
         ctx->mDrawLock.unlock();
         return;
     }
