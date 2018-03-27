@@ -26,8 +26,8 @@
 #include <binder/IBinder.h>
 #include <binder/IInterface.h>
 #include <binder/IPCThreadState.h>
-#include <utils/Errors.h>
 #include <cutils/android_filesystem_config.h>
+#include <utils/Errors.h>
 #include <IQService.h>
 
 #define QSERVICE_DEBUG 0
