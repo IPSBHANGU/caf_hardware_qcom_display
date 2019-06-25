@@ -1,0 +1,40 @@
+diff --git a/Android.mk b/Android.mk
+index 40520e1..d4aa494 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -1,15 +1,7 @@
+-ifeq ($(call my-dir),$(call project-path-for,qcom-display))
+ display-hals := include libgralloc libgenlock libcopybit
+ display-hals += libhwcomposer liboverlay libqdutils libhdmi libqservice
+ display-hals += libmemtrack
+ ifneq ($(TARGET_PROVIDES_LIBLIGHT),true)
+ display-hals += liblight
+ endif
+-ifeq ($(call is-vendor-board-platform,QCOM),true)
+-    include $(call all-named-subdir-makefiles,$(display-hals))
+-else
+-ifneq ($(filter msm% apq%,$(TARGET_BOARD_PLATFORM)),)
+-    include $(call all-named-subdir-makefiles,$(display-hals))
+-endif
+-endif
+-endif
++include $(call all-named-subdir-makefiles,$(display-hals))
+diff --git a/common.mk b/common.mk
+index e486372..2c3387d 100644
+--- a/common.mk
++++ b/common.mk
+@@ -58,7 +58,7 @@ common_flags += -isystem $(TARGET_OUT_HEADERS)/qcom/display
+ ifneq ($(call is-platform-sdk-version-at-least,18),true)
+     common_flags += -DANDROID_JELLYBEAN_MR1=1
+ endif
+-ifeq ($(call is-vendor-board-platform,QCOM),true)
++#ifeq ($(call is-vendor-board-platform,QCOM),true)
+ # This check is to pick the kernel headers from the right location.
+ # If the macro above is defined, we make the assumption that we have the kernel
+ # available in the build tree.
+@@ -66,4 +66,4 @@ ifeq ($(call is-vendor-board-platform,QCOM),true)
+ # failing which, they are picked from bionic.
+     common_deps += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
+     kernel_includes += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
+-endif
++#endif

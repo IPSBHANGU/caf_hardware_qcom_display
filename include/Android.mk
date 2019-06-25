@@ -20,5 +20,6 @@ LOCAL_COPY_HEADERS	      := color_metadata.h \
                                  ../libqservice/IQClient.h \
 				 ../libqservice/IQService.h \
 				 ../libqservice/QService.h \
-				 ../libqservice/QServiceUtils.h
+				 ../libqservice/QServiceUtils.h \
+				 ../libcopybit/c2d2.h
 include $(BUILD_COPY_HEADERS)
